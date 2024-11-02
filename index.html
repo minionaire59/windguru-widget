@@ -3,28 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic WindGuru Forecast</title>
+    <title>WindGuru Widget</title>
 </head>
 <body>
-    <h2>WindGuru Forecast</h2>
     <div id="windguru-widget">
-        <!-- WindGuru widget will load here based on location parameter -->
+        <!-- WindGuru widget will load here -->
     </div>
-
-    <script>
-        // Function to get URL parameters
-        function getURLParameter(name) {
-            const params = new URLSearchParams(window.location.search);
-            return params.get(name);
-        }
-
-        // Get the 'location' parameter from the URL
-        const locationId = getURLParameter('location') || '47828'; // Default location ID
-
-        // Load the WindGuru widget script dynamically based on the location ID
+    
+    <script id="wg_fwdg_47828_100_1730568598387">
         (function (window, document) {
             var loader = function () {
-                var arg = ["s=" + locationId, "m=100", "uid=wg_fwdg_" + locationId + "_100_1730568598387", "wj=knots", "tj=c", "waj=m", "tij=cm", "odh=6", "doh=20", "fhours=72", "hrsm=2", "vt=forecasts", "lng=en", "idbs=1", "p=WINDSPD,GUST,SMER,TMPE,APCP1s,RATING"];
+                var arg = ["s=47828" ,"m=100","uid=wg_fwdg_47828_100_1730568598387" ,"wj=knots" ,"tj=c" ,"waj=m" ,"tij=cm" ,"odh=6" ,"doh=20" ,"fhours=72" ,"hrsm=2" ,"vt=forecasts" ,"lng=en" ,"idbs=1" ,"p=WINDSPD,GUST,SMER,TMPE,APCP1s,RATING"];
                 var script = document.createElement("script");
                 var tag = document.getElementsByTagName("script")[0];
                 script.src = "https://www.windguru.cz/js/widget.php?" + (arg.join("&"));

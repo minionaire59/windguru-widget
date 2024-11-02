@@ -11,33 +11,45 @@
     </div>
     
     <script>
-        // Extract the 'location' parameter directly from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const locationId = urlParams.get('location') || '47828'; // Default to 47828 if not provided
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
 
-        (function loadWindGuruWidget(locationId) {
-            var arg = [
-                `s=${locationId}`, 
-                "m=100",
-                "uid=wg_fwdg_" + locationId + "_100_1730568598387",
-                "wj=knots",
-                "tj=c",
-                "waj=m",
-                "tij=cm",
-                "odh=6",
-                "doh=20",
-                "fhours=72",
-                "hrsm=2",
-                "vt=forecasts",
-                "lng=en",
-                "idbs=1",
-                "p=WINDSPD,GUST,SMER,TMPE,APCP1s,RATING"
-            ];
-            var script = document.createElement("script");
-            var tag = document.getElementsByTagName("script")[0];
-            script.src = "https://www.windguru.cz/js/widget.php?" + arg.join("&");
-            tag.parentNode.insertBefore(script, tag);
-        })(locationId);  // Immediately invoke the function with locationId
+        function loadWindGuruWidget(locationId) {
+            (function (window, document) {
+                var loader = function () {
+                    // Set the location ID dynamically
+                    var arg = [
+                        `s=${locationId}`, 
+                        "m=100",
+                        "uid=wg_fwdg_" + locationId + "_100_1730568598387",
+                        "wj=knots",
+                        "tj=c",
+                        "waj=m",
+                        "tij=cm",
+                        "odh=6",
+                        "doh=20",
+                        "fhours=72",
+                        "hrsm=2",
+                        "vt=forecasts",
+                        "lng=en",
+                        "idbs=1",
+                        "p=WINDSPD,GUST,SMER,TMPE,APCP1s,RATING"
+                    ];
+                    var script = document.createElement("script");
+                    var tag = document.getElementsByTagName("script")[0];
+                    script.src = "https://www.windguru.cz/js/widget.php?" + (arg.join("&"));
+                    tag.parentNode.insertBefore(script, tag);
+                };
+                window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+            })(window, document);
+        }
+
+        // Retrieve location ID from URL parameter 'location'
+        const locationId = getUrlParameter('location') || '47828'; // Default to 47828 if not provided
+        loadWindGuruWidget(locationId);
     </script>
 </body>
 </html>
